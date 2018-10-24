@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/products" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Back
+    </a>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Add Series
+  </div>
+  <div class="card-body">
+   
+
+
+      <div id="accordion">
+        <!--TEAM ONE-->
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                Team#1
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT1P1($event)" (change)="onChangeT1P1($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 1...">
+                </ng-select>
+              </div>
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT1P2($event)" (change)="onChangeT1P2($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 2...">
+                </ng-select>
+              </div>
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT1P3($event)" (change)="onChangeT1P3($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 3...">
+                </ng-select>
+              </div>
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT1P4($event)" (change)="onChangeT1P4($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 4...">
+                </ng-select>
+              </div>
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT1P5($event)" (change)="onChangeT1P5($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 5...">
+                </ng-select>
+              </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <!--TEAM TWO-->
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                aria-controls="collapseTwo">
+                Team#2
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT2P1($event)" (change)="onChangeT2P1($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 1...">
+                </ng-select>
+              </div>
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT2P2($event)" (change)="onChangeT2P2($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 2...">
+                </ng-select>
+              </div>
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT2P3($event)" (change)="onChangeT2P3($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 3...">
+                </ng-select>
+              </div>
+
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT2P4($event)" (change)="onChangeT2P4($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 4...">
+                </ng-select>
+              </div>
+              <div class="opt">
+                <ng-select #selectT1P1 [items]="players" (clear)="onClearT2P5($event)" (change)="onChangeT2P5($event)"
+                  bindLabel="gamerID" bindValue="id" placeholder="Select player 5...">
+                </ng-select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+      <br>
+      <button (click)="onSubmit()"  class="btn btn-block btn-success">Create New Series</button>
+     
+
+  </div>
+</div>

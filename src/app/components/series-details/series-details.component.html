@@ -1,0 +1,727 @@
+<div>
+  <h2>SeriesID: {{series?.sid}}</h2>
+  <h2>Created Date: {{series?.created_date}}</h2>
+</div>
+<div class="row">
+  <div class="col-6">
+    <h1 style="text-align:center">Team 1</h1>
+
+    <table *ngIf="team1PlayersList?.length > 0;else noPlayers" class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of team1PlayersList">
+          <td>{{player?.gamerID}}</td>
+          <td>{{player?.role}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="text-align:center" class="col-6">
+    <h1 style="text-align:center">Team 2</h1>
+
+    <table *ngIf="team2PlayersList?.length > 0;else noPlayers" class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of team2PlayersList">
+          <td>{{player?.gamerID}}</td>
+          <td>{{player?.role}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map1?.mapNumber}} - {{map1?.gamemode}} - {{map1?.name}}</h3>
+
+
+
+    </div>
+    <div class="card-body">
+
+      <div id="mapForm1">
+        <h3>Map Details</h3>
+        <form  [formGroup]="map1Form">
+          <mat-form-field style="margin:10px">
+            <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+          </mat-form-field>
+          <mat-form-field style="margin:10px">
+            <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+          </mat-form-field>
+          <mat-form-field style="margin:10px">
+            <mat-select formControlName="winningTeam" placeholder="Winning Team">
+              <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                {{team.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button (click)="updateMap1()" color="primary">Update</button>
+
+        </form>
+
+      </div>
+
+      <h3>Team 1</h3>
+
+      <form [formGroup]="m1t1Form">
+        <div class="form-group">
+
+          <div formArrayName="players" *ngFor="let player of m1t1Form.get('players').controls; let i = index;">
+            <div [formGroupName]="i">
+
+              <mat-label style="font-weight:bold">
+                {{map1team1Players[i]?.name}}
+              </mat-label>
+              <br>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="kills" formControlName="kills">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="deaths" formControlName="deaths">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="damage" formControlName="damage">
+              </mat-form-field>
+              <button mat-raised-button (click)="updatem1t1Record(i)" color="primary">Update</button>
+
+
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m1t2Form">
+        <div class="form-group">
+
+          <div formArrayName="players" *ngFor="let player of m1t2Form.get('players').controls; let i = index;">
+            <div [formGroupName]="i">
+
+              <mat-label style="font-weight:bold">
+                {{map1team2Players[i]?.name}}
+              </mat-label>
+              <br>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="kills" formControlName="kills">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="deaths" formControlName="deaths">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="damage" formControlName="damage">
+              </mat-form-field>
+              <button mat-raised-button (click)="updatem1t2Record(i)" color="primary">Update</button>
+
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map2?.mapNumber}} - {{map2?.gamemode}} - {{map2?.name}}</h3>
+    </div>
+    <div class="card-body">
+
+        <div id="mapForm2">
+        <h3>Map Details</h3>
+        <form  [formGroup]="map2Form">
+          <mat-form-field style="margin:10px">
+            <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+          </mat-form-field>
+          <mat-form-field style="margin:10px">
+            <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+          </mat-form-field>
+          <mat-form-field style="margin:10px">
+            <mat-select formControlName="winningTeam" placeholder="Winning Team">
+              <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                {{team.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button (click)="updateMap2()" color="primary">Update</button>
+
+        </form>
+
+      </div>
+
+      <h3>Team 1</h3>
+
+
+      <form [formGroup]="m2t1Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m2t1Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map2team1Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem2t1Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m2t2Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m2t2Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map2team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem2t2Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map3?.mapNumber}} - {{map3?.gamemode}} - {{map3?.name}}</h3>
+    </div>
+    <div class="card-body">
+
+        <div id="mapForm3">
+            <h3>Map Details</h3>
+            <form  [formGroup]="map3Form">
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <mat-select formControlName="winningTeam" placeholder="Winning Team">
+                  <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                    {{team.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button (click)="updateMap3()" color="primary">Update</button>
+    
+            </form>
+
+      <h3>Team 1</h3>
+
+
+      <form [formGroup]="m3t1Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m3t1Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map3team1Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem3t1Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m3t2Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m3t2Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map3team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem3t2Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+
+  </div>
+
+
+
+</div>
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map4?.mapNumber}} - {{map4?.gamemode}} - {{map4?.name}}</h3>
+    </div>
+    <div class="card-body">
+
+        <div id="mapForm4">
+            <h3>Map Details</h3>
+            <form  [formGroup]="map4Form">
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <mat-select formControlName="winningTeam" placeholder="Winning Team">
+                  <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                    {{team.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button (click)="updateMap4()" color="primary">Update</button>
+    
+            </form>
+      <h3>Team 1</h3>
+
+
+      <form [formGroup]="m4t1Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m4t1Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map4team1Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem4t1Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m4t2Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m4t2Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map4team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem4t2Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+</div>
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map5?.mapNumber}} - {{map5?.gamemode}} - {{map5?.name}}</h3>
+    </div>
+    <div class="card-body">
+
+        <div id="mapForm5">
+            <h3>Map Details</h3>
+            <form  [formGroup]="map5Form">
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <mat-select formControlName="winningTeam" placeholder="Winning Team">
+                  <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                    {{team.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button (click)="updateMap5()" color="primary">Update</button>
+    
+            </form>
+      <h3>Team 1</h3>
+
+
+      <form [formGroup]="m5t1Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m5t1Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map5team1Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem5t1Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m5t2Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m5t2Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map5team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem5t2Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+</div>
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map6?.mapNumber}} - {{map6?.gamemode}} - {{map6?.name}}</h3>
+    </div>
+    <div class="card-body">
+
+        <div id="mapForm6">
+            <h3>Map Details</h3>
+            <form  [formGroup]="map6Form">
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <mat-select formControlName="winningTeam" placeholder="Winning Team">
+                  <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                    {{team.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button (click)="updateMap6()" color="primary">Update</button>
+    
+            </form>
+
+      <h3>Team 1</h3>
+
+
+      <form [formGroup]="m6t1Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m6t1Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map6team1Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem6t1Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m6t2Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m6t2Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map6team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem6t2Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+</div>
+</div>
+
+<div class="row">
+  <div style="width:100%" class="card">
+    <div class="card-header">
+      <h3>Map {{map7?.mapNumber}} - {{map7?.gamemode}} - {{map7?.name}}</h3>
+    </div>
+    <div class="card-body">
+
+        <div id="mapForm7">
+            <h3>Map Details</h3>
+            <form  [formGroup]="map7Form">
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 1" formControlName="scoreTeam1">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <input type="number" matInput placeholder="Score Team 2" formControlName="scoreTeam2">
+              </mat-form-field>
+              <mat-form-field style="margin:10px">
+                <mat-select formControlName="winningTeam" placeholder="Winning Team">
+                  <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                    {{team.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button (click)="updateMap7()" color="primary">Update</button>
+    
+            </form>
+      <h3>Team 1</h3>
+
+
+      <form [formGroup]="m7t1Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m7t1Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map7team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem7t1Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h3>Team 2</h3>
+
+
+      <form [formGroup]="m7t2Form" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-10">
+            <div formArrayName="players" *ngFor="let player of m7t2Form.get('players').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-label style="font-weight:bold">
+                  {{map7team2Players[i]?.name}}
+                </mat-label>
+                <br>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="kills" formControlName="kills">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="deaths" formControlName="deaths">
+                </mat-form-field>
+                <mat-form-field style="margin:10px">
+                  <input type="number" matInput placeholder="damage" formControlName="damage">
+                </mat-form-field>
+                <button mat-raised-button (click)="updatem7t2Record(i)" color="primary">Update</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+</div>
+</div>
