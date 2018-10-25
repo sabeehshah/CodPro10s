@@ -6,4 +6,6 @@ export interface Map{
     scoreTeam1:number,
     scoreTeam2:number,
     mapNumber:number
+    losingTeam:string,
+    mapReported:boolean
 }

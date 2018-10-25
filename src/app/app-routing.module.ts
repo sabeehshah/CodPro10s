@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { PlayerlistComponent } from './components/playerlist/playerlist.component';
 import { AddSeriesComponent } from './components/add-series/add-series.component';
 import { SeriesDetailsComponent } from './components/series-details/series-details.component';
+import { StatsComponent } from './components/stats/stats.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent, data: { title: 'Register' }},
   {path:'players', component:PlayerlistComponent, data:{tite:'Players'}},
   {path:'series/add', component:AddSeriesComponent, data:{title:'Add-Series'}},
-  {path:'series/:id', component:SeriesDetailsComponent, data:{title:'Series-Details'}}
+  {path:'series/:id', component:SeriesDetailsComponent, data:{title:'Series-Details'}},
+  {path:'stats', component:StatsComponent, data:{title:'stats'}}
 ]
 
 @NgModule({

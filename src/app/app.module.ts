@@ -27,6 +27,12 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatChipsModule } from '@angular/material/chips'
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ToastrModule } from 'ngx-toastr';
+import { StatsComponent } from './components/stats/stats.component'
+import { MatCardModule } from '@angular/material/card'
 
 
 
@@ -42,7 +48,8 @@ import { MatChipsModule } from '@angular/material/chips'
     NavbarComponent,
     PlayerlistComponent,
     AddSeriesComponent,
-    SeriesDetailsComponent
+    SeriesDetailsComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +65,12 @@ import { MatChipsModule } from '@angular/material/chips'
     MatButtonModule,
     MatCheckboxModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatSortModule,
+    MatCardModule,
+    MatPaginatorModule,
+    ToastrModule.forRoot()
   ],
   providers:
     [

@@ -134,7 +134,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 1
+    mapNumber: 1,
+    losingTeam:'',
+    mapReported:false
   }
   map2: Map = {
     id: '',
@@ -143,7 +145,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 2
+    mapNumber: 2,
+    losingTeam:'',
+    mapReported:false
   }
   map3: Map = {
     id: '',
@@ -152,7 +156,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 3
+    mapNumber: 3,
+    losingTeam:'',
+    mapReported:false
   }
   map4: Map = {
     id: '',
@@ -161,7 +167,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 4
+    mapNumber: 4,
+    losingTeam:'',
+    mapReported:false
   }
   map5: Map = {
     id: '',
@@ -170,7 +178,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 5
+    mapNumber: 5,
+    losingTeam:'',
+    mapReported:false
   }
   map6: Map = {
     id: '',
@@ -179,7 +189,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 6
+    mapNumber: 6,
+    losingTeam:'',
+    mapReported:false
   }
   map7: Map = {
     id: '',
@@ -188,7 +200,9 @@ export class AddSeriesComponent implements OnInit {
     scoreTeam1: 0,
     scoreTeam2: 0,
     winningTeam: '',
-    mapNumber: 7
+    mapNumber: 7,
+    losingTeam:'',
+    mapReported:false
   }
 
 

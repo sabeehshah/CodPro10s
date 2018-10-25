@@ -13,6 +13,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 
 
 import { PlayerService } from 'src/app/services/player.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -158,79 +159,96 @@ export class SeriesDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private playerService: PlayerService,
     private fb: FormBuilder,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
 
     this.map1Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
+
+
     this.map2Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
     this.map3Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
     this.map4Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
     this.map5Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
     this.map6Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
     this.map7Form = this.fb.group({
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-      winningTeam: '',
+      scoreTeam1: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      scoreTeam2: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
+      winningTeam: ['', [Validators.required]],
       id: '',
       mapNumber: '',
       gamemode: '',
-      name: ''
+      name: '',
+      losingTeam: '',
+      mapReported: false
     })
 
 
@@ -878,51 +896,175 @@ export class SeriesDetailsComponent implements OnInit {
 
   updateMap1() {
     console.log(this.map1Form.value)
+
+
     var m = this.map1Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map1Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
+
   }
 
   updateMap2() {
-    console.log(this.map2Form.value)
     var m = this.map2Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map2Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
   }
 
   updateMap3() {
-    console.log(this.map3Form.value)
     var m = this.map3Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map3Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
+
   }
 
   updateMap4() {
-    console.log(this.map4Form.value)
     var m = this.map4Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map4Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
   }
 
   updateMap5() {
-    console.log(this.map5Form.value)
     var m = this.map5Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map5Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
   }
 
   updateMap6() {
-    console.log(this.map6Form.value)
     var m = this.map6Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map6Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
   }
 
   updateMap7() {
-    console.log(this.map7Form.value)
     var m = this.map7Form.value as Map
-    this.seriesService.updateMapInSeries(this.id, m)
-    console.log("map updated")
+    if (this.map7Form.valid) {
+      var c = confirm("Are you sure? You can only report once!")
+      if (c == true) {
+        m.mapReported = true
+        this.seriesService.updateMapInSeries(this.id, m)
+        this.toastr.success('Map Has Been Updated', 'Map Update', {
+          timeOut: 3000
+        })
+        console.log("map updated")
+      } else {
+        console.log("cancelled")
+      }
+
+
+    } else {
+      this.toastr.error('Provide valid data', 'Invalid Data Found', {
+        timeOut: 3000
+      })
+      console.log("Invalid Data")
+    }
   }
 
   addPlayerStats() {

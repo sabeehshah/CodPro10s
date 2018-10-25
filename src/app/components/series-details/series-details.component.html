@@ -66,7 +66,16 @@
                 {{team.name}}
               </mat-option>
             </mat-select>
+            
           </mat-form-field>
+          <mat-form-field style="margin:10px">
+              <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                  {{team.name}}
+                </mat-option>
+              </mat-select>
+              
+            </mat-form-field>
           <button mat-raised-button (click)="updateMap1()" color="primary">Update</button>
 
         </form>
@@ -169,6 +178,14 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field style="margin:10px">
+              <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                  {{team.name}}
+                </mat-option>
+              </mat-select>
+              
+            </mat-form-field>
           <button mat-raised-button (click)="updateMap2()" color="primary">Update</button>
 
         </form>
@@ -263,6 +280,14 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-form-field style="margin:10px">
+                  <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                    <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                      {{team.name}}
+                    </mat-option>
+                  </mat-select>
+                  
+                </mat-form-field>
               <button mat-raised-button (click)="updateMap3()" color="primary">Update</button>
     
             </form>
@@ -358,6 +383,14 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-form-field style="margin:10px">
+                  <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                    <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                      {{team.name}}
+                    </mat-option>
+                  </mat-select>
+                  
+                </mat-form-field>
               <button mat-raised-button (click)="updateMap4()" color="primary">Update</button>
     
             </form>
@@ -455,6 +488,15 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+
+              <mat-form-field style="margin:10px">
+                  <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                    <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                      {{team.name}}
+                    </mat-option>
+                  </mat-select>
+                  
+                </mat-form-field>
               <button mat-raised-button (click)="updateMap5()" color="primary">Update</button>
     
             </form>
@@ -553,6 +595,14 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-form-field style="margin:10px">
+                  <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                    <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                      {{team.name}}
+                    </mat-option>
+                  </mat-select>
+                  
+                </mat-form-field>
               <button mat-raised-button (click)="updateMap6()" color="primary">Update</button>
     
             </form>
@@ -652,6 +702,14 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-form-field style="margin:10px">
+                  <mat-select formControlName="losingTeam" placeholder="Losing Team">
+                    <mat-option *ngFor="let team of seriesTeams" [value]="team.id">
+                      {{team.name}}
+                    </mat-option>
+                  </mat-select>
+                  
+                </mat-form-field>
               <button mat-raised-button (click)="updateMap7()" color="primary">Update</button>
     
             </form>
